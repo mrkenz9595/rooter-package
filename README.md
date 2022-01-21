@@ -1,2 +1,0 @@
-# rooter-package
-Package personal

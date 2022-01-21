@@ -1,0 +1,171 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+
+	<link rel="stylesheet" href="#LUCIS#rooter/css/iconmoon_splash.css">
+	<link rel="stylesheet" href="#LUCIS#rooter/css/splash.css">
+	
+	<link rel="SHORTCUT ICON" href="luci-static/rooter/img/favicon.gif">
+	<link rel="icon" type="image/gif" href="luci-static/rooter/img/favicon.gif">
+</head>
+<script src="luci-static/material/js/jquery.min.js"></script>
+<script type="text/javascript">
+    window.onload = startInterval;
+    function startInterval()
+    {
+        setInterval("startTime();",5000);
+		setInterval("bandTime();",60000);
+    }
+    
+    function startTime()
+    {
+         $('#block1').load(document.URL +  ' #block1');  
+    }
+	
+	function bandTime()
+    {
+         $('#block2').load(document.URL +  ' #block2');  
+    }
+	
+  </script>
+<body id='rooterSplashStatus' class='rooterSplash' >
+	#TITLEBAR#
+	#BUTTON#
+	<div class='rooterPageContent' id="block1">
+
+		<h2><i class="icon icon-signal"></i> Modem <span class="msCell" id='msCell_conntype'><span></span></span></h2>
+		<div class='modemStatusRow modemStatusRow1'>
+				<div class='msCell' id='msCell_per'>
+					<div class='msTitle'>Strength (%)</div>
+					<span>#PER#</span>
+				</div>
+				<div class='msCell' id='msCell_csq'>
+					<div class='msTitle'>CSQ</div>
+					<span>#CSQ#</span>
+				</div>
+				<div class='msCell' id='msCell_rssi'>
+					<div class='msTitle'>RSSI (dBm)</div>
+					<span>#RSSI#</span>
+				</div>
+				<div class='msCell' id='msCell_rscp'>
+					<div class='msTitle'>RSCP (dBm) RSRP</div>
+					<span>#RSCP#</span>
+				</div>
+				<div class='msCell' id='msCell_ecio'>
+					<div class='msTitle'>ECIO (dB) RSRQ</div>
+					<span>#RSRQ#</span>
+				</div>
+				<div class='msCell' id='msCell_sinr'>
+					<div class='msTitle'>SINR (dB)</div>
+					<span>#SINR#</span>
+				</div>
+			</div>
+			
+		<div>
+			<h3><i class="icon icon-podcast"></i> Network <span class="msCell" id='msCell_cops'><span></span></span></h3>
+
+			<div class='modemStatusRow modemStatusRow2'>
+				<div class='msCell' id='msCell_mode'>
+					<div class='msTitle'>Mode</div>
+					<span>#MODE#</span>
+				</div>
+				<div class='msCell' id='msCell_mcc'>
+					<div class='msTitle'>MCC</div>
+					<span>#MCC#</span>
+				</div>
+				<div class='msCell' id='msCell_mnc'>
+					<div class='msTitle'>MNC</div>
+					<span>#MNC#</span>
+				</div>
+				<div class='msCell' id='msCell_rnc'>
+					<div class='msTitle'>RNC/eNB ID</div>
+					<span>#RNC#</span> <i id='msCell_rncn'><span>#RNCN#</span></i>
+				</div>
+
+				<div class='msCell' id='msCell_lac'>
+					<div class='msTitle'>LAC</div>
+					<span>#LAC#</span> <i id='msCell_lacn'><span>#LACN#</span></i>
+				</div>
+				<div class='msCell' id='msCell_channel'>
+					<div class='msTitle'>Channel (EARFCN)</div>
+					<span>#CHAN#</span>
+				</div>
+				<div class='msCell' id='msCell_cid'>
+					<div class='msTitle'>PCI</div>
+					<span>#CELLID#</span>
+				</div>
+				<div class='msCell' id='msCell_lband'>
+					<div class='msTitle'>Bands</div>
+					<span>#BAND#</span>
+				</div>
+			</div>
+		</div>
+		<div>
+			<h3><i class="icon icon-plug"></i> Device <span class="msCell" id='msCell_conntype'><span></span></span></h3>
+
+			<div class='modemStatusRow modemStatusRow2'>
+				<div class='msCell' id='msCell_modem'>
+					<div class='msTitle'>Modem</div>
+					<span>#MODEM#</span>
+				</div>
+				<div class='msCell' id='msCell_proto'>
+					<div class='msTitle'>Protocol</div>
+					<span>#PROTO#</span>
+				</div>
+				<div class='msCell' id='msCell_port'>
+					<div class='msTitle'>Port</div>
+					<span>#PORT#</span>
+				</div>
+				<div class='msCell' id='msCell_tempur'>
+					<div class='msTitle'>Temperature</div>
+					<span>#TEMP#</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+		
+	<div class='rooterPageContent' id="block3">
+		<div class='rooterPageHead'>
+			<div class="rooterHeadTitle"> OpenSpeedTest</div>
+		</div>
+		<div>
+			<table width="100%" height="100%" border="0" id="apply3" >
+				<tr>
+					<td align="middle">
+						<div id="rooterItems" >
+							<a><iframe id="apply4" src="https://openspeedtest.com/Get-widget.php?" width="600" height="350" style="border:8px groove black;border-radius: 10px;" title="OpenSpeedTest"></iframe></a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+	<div class='rooterPageContent' id="block2">
+		<div class='rooterPageHead'>
+			<div class="rooterHeadTitle"> Bandwidth Usage</div>
+		</div>
+		
+		<div>
+			<table width="100%" height="100%" border="0" id="apply5" >
+				<tr>
+					<td align="middle">
+						<div id="rooterItems" >
+							<a><iframe id="apply6" src="luci-static/iframe.html" width="600" height="750" style="border:8px groove black;border-radius: 10px;" title="OpenSpeedTest"></iframe></a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+</body>
+</html>
