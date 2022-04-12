@@ -136,6 +136,13 @@ if nixio.fs.access("/etc/config/mwan3") then
 	mlb.default=0
 end
 
+mtu = di:taboption(this_taba, Value, "mtu", translate("Custom MTU :"),
+		translate("Acceptable values: 1420-1500. Size for Custom MTU. This may have to be adjusted for certain ISPs"));
+mtu.optional=true
+mtu.rmempty = true
+mtu.default = "1500"
+mtu.datatype = "range(1420, 1500)"
+
 mat = di:taboption(this_taba, ListValue, "at", translate("Enable Custom AT Startup Command at Connection :"));
 mat:value("0", "No")
 mat:value("1", "Yes")
@@ -500,6 +507,13 @@ if nixio.fs.access("/etc/config/mwan3") then
 	cmlb.default=0
 end
 
+mtu = s:taboption(this_ctaba, Value, "mtu", translate("Custom MTU :"),
+		translate("Acceptable values: 1420-1500. Size for Custom MTU. This may have to be adjusted for certain ISPs"));
+mtu.optional=true
+mtu.rmempty = true
+mtu.default = "1500"
+mtu.datatype = "range(1420, 1500)"
+
 cmat = s:taboption(this_ctaba, ListValue, "at", "Enable Custom AT Startup Command at Connection :");
 cmat:value("0", "No")
 cmat:value("1", "Yes")
@@ -633,6 +647,7 @@ cb2:depends("alive", "2")
 cb2:depends("alive", "3")
 cb2:depends("alive", "4")
 cb2.optional=false;
+cb2.default="8.8.8.8"
 
 return m
 

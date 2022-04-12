@@ -96,9 +96,15 @@ uci commit modem
 
 $ROOTER/luci/celltype.sh $CURRMODEM
 
-M2=$(echo "$OX" | grep -o "+CNUM:[^,]\+,[^,]\+,")
-CNUM=$(echo "$M2" | cut -d\" -f4)
-CNUMx=$(echo "$M2" | cut -d\" -f2)
+M2=$(echo "$OX" | grep -o "+CNUM:[^,]*,[^,]*,[0-9]\{3\}")","
+M2=${M2:6}
+CNUMx=$(echo "$M2" | cut -d, -f1 | cut -d\" -f2)
+CNUMx=$(echo $CNUMx)
+CNUM=$(echo "$M2" | cut -d, -f2 | cut -d\" -f2)
+CNUMtype=$(echo "$M2" | cut -d, -f3)
+if [ "${CNUM:0:1}" != "+" -a "$CNUMtype" == "145" ]; then
+	CNUM="+"$CNUM
+fi
 if [ -z "$CNUM" ]; then
 	CNUM="*"
 fi
@@ -114,6 +120,26 @@ else
 fi
 echo 'NLEN="'"$NLEN"'"' > /tmp/namelen$CURRMODEM
 
+ATCMDD="ATE1"
+OX=$($ROOTER/gcom/gcom-locked "/dev/ttyUSB$CPORT" "run-at.gcom" "$CURRMODEM" "$ATCMDD")
+ATCMDD="AT+CTZU=1"
+OX=$($ROOTER/gcom/gcom-locked "/dev/ttyUSB$CPORT" "run-at.gcom" "$CURRMODEM" "$ATCMDD")
+ATCMDD="AT\$QCPBMPREF?"
+OX=$($ROOTER/gcom/gcom-locked "/dev/ttyUSB$CPORT" "run-at.gcom" "$CURRMODEM" "$ATCMDD")
+PBzero=$(echo "$OX" | grep "0")
+if [ -n "$PBzero" ]; then
+	ATCMDD="AT\$QCPBMPREF=1"
+	OX=$($ROOTER/gcom/gcom-locked "/dev/ttyUSB$CPORT" "run-at.gcom" "$CURRMODEM" "$ATCMDD")
+fi
+if [ "$IDV" == "2c7c" ]; then
+	ATCMDD="AT+QLWCFG=\"startup\""
+	OX=$($ROOTER/gcom/gcom-locked "/dev/ttyUSB$CPORT" "run-at.gcom" "$CURRMODEM" "$ATCMDD")
+	LWon=$(echo "$OX" | grep "1")
+	if [ -n "$LWon" ]; then
+		ATCMDD="AT+QLWCFG=\"startup\",0"
+		OX=$($ROOTER/gcom/gcom-locked "/dev/ttyUSB$CPORT" "run-at.gcom" "$CURRMODEM" "$ATCMDD")
+	fi
+fi
 ATCMDD="AT+CIMI"
 OX=$($ROOTER/gcom/gcom-locked "/dev/ttyUSB$CPORT" "run-at.gcom" "$CURRMODEM" "$ATCMDD")
 OX=$($ROOTER/common/processat.sh "$OX")
